@@ -5,6 +5,9 @@ import { NotificationProvider } from './context/NotificationContext';
 import { Navigation } from './components/Navigation';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
+import { Goals } from './pages/Goals';
+import { Activities } from './pages/Activities';
+import { Reminders } from './pages/Reminders';
 import { Settings } from './pages/Settings';
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/goals" element={<Goals />} />
+                <Route path="/activities" element={<Activities />} />
+                <Route path="/reminders" element={<Reminders />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </main>
