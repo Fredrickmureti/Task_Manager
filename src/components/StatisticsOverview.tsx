@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TrendingUp, Users, Clock, CheckCircle } from 'lucide-react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { Task } from '../types';
+import { TaskContext } from '../context/TaskContext';
 
 export function StatisticsOverview() {
-  const [tasks] = useLocalStorage<Task[]>('tasks', []);
+  const { tasks } = useContext(TaskContext);
 
   const statistics = {
     totalTasks: tasks.length,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Check, Trash, Tag, Calendar, AlertTriangle, GripVertical } from 'lucide-react';
+import { Check, Trash, Tag, Calendar, AlertTriangle, GripVertical, Star } from 'lucide-react';
 import type { Task } from '../types';
 
 interface SortableItemProps {
@@ -9,6 +9,8 @@ interface SortableItemProps {
   task: Task;
   onToggle: () => void;
   onDelete: () => void;
+  onStar: () => void;
+  isStarred: boolean;
   isOverdue: boolean;
   priorities: {
     value: Task['priority'];
@@ -17,7 +19,16 @@ interface SortableItemProps {
   }[];
 }
 
-export function SortableItem({ id, task, onToggle, onDelete, isOverdue, priorities }: SortableItemProps) {
+export function SortableItem({ 
+  id, 
+  task, 
+  onToggle, 
+  onDelete, 
+  onStar,
+  isStarred,
+  isOverdue, 
+  priorities 
+}: SortableItemProps) {
   const {
     attributes,
     listeners,
@@ -59,6 +70,16 @@ export function SortableItem({ id, task, onToggle, onDelete, isOverdue, prioriti
         >
           {task.completed && <Check className="w-3 h-3 text-white" />}
         </button>
+        <button
+          onClick={onStar}
+          className={`flex-shrink-0 ${
+            isStarred
+              ? 'text-yellow-500'
+              : 'text-gray-400 hover:text-yellow-500'
+          } transition-colors`}
+        >
+          <Star className="w-5 h-5" fill={isStarred ? 'currentColor' : 'none'} />
+        </button>
         <div className="min-w-0">
           <span className={`block truncate ${
             task.completed ? 'line-through text-gray-500 dark:text-gray-400' : 'text-gray-800 dark:text-white'
@@ -78,7 +99,7 @@ export function SortableItem({ id, task, onToggle, onDelete, isOverdue, prioriti
                     ? 'text-red-500 dark:text-red-400'
                     : 'text-gray-500 dark:text-gray-400'
                 }`}>
-                  {new Date(task.dueDate).toLocaleDateString()}
+                  {new Date(task.dueDate).toLocaleString()}
                 </span>
               </div>
             )}
