@@ -1,5 +1,5 @@
 ```markdown
-# Task Tracker
+# Task Tracker Pro
 
 ## Overview
 
